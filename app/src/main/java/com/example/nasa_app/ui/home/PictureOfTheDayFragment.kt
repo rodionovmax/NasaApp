@@ -18,7 +18,10 @@ import com.example.nasa_app.ui.picture.PictureOfTheDayData
 import com.example.nasa_app.ui.picture.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.fragment_chips.*
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.main_fragment.chipGroup
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -29,8 +32,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getData()
-            .observe(this@PictureOfTheDayFragment, Observer<PictureOfTheDayData> { renderData(it) })
+
     }
 
     override fun onCreateView(
@@ -49,6 +51,25 @@ class PictureOfTheDayFragment : Fragment() {
             })
         }
         setBottomAppBar(view)
+
+        chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+//            chipGroup.findViewById<Chip>(position)?.let {
+//                Toast.makeText(context, "Selected picture from: ${it.text}", Toast.LENGTH_SHORT).show()
+//
+//            }
+            val chip: Chip? = chipGroup.findViewById(position)
+
+            Toast.makeText(
+                context,
+                "Selected picture from: ${chip?.text}",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            viewModel.getData(position).observe(
+                    this@PictureOfTheDayFragment,
+                    Observer<PictureOfTheDayData> { renderData(it) }
+            )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

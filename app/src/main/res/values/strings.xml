@@ -19,6 +19,9 @@
     <string name="settings_title">Settings Fragment</string>
     <string name="remove_from_favorites">Remove from favorites</string>
     <string name="favorites_picture">Favorites picture</string>
+    <string name="chip_today">Today</string>
+    <string name="chip_yesterday">Yesterday</string>
+    <string name="chip_two_days_ago">Two days ago</string>
 </resources>
 
 
