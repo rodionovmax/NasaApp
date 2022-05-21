@@ -1,3 +1,5 @@
+package com.example.nasa_app.ui.home
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,7 +14,6 @@ import coil.api.load
 import com.example.nasa_app.R
 import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.ui.chips.ChipsFragment
-import com.example.nasa_app.ui.picture.BottomNavigationDrawerFragment
 import com.example.nasa_app.ui.picture.PictureOfTheDayData
 import com.example.nasa_app.ui.picture.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar

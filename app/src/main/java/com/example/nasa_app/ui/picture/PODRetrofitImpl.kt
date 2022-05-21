@@ -1,5 +1,6 @@
 package com.example.nasa_app.ui.picture
 
+import com.example.nasa_app.network.api.PictureOfTheDayAPI
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -11,6 +12,7 @@ import java.io.IOException
 class PODRetrofitImpl {
 
     private val baseUrl = "https://api.nasa.gov/"
+
     fun getRetrofitImpl(): PictureOfTheDayAPI {
         val podRetrofit = Retrofit.Builder()
             .baseUrl(baseUrl)

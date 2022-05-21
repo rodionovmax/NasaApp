@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.about.AboutFragment"
+     >
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/versionTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/about_version_title"
+        android:textAllCaps="true"
+        android:layout_margin="10dp"/>
+
+    <View
+        android:id="@+id/upperHorizontalLine"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/versionTitle"
+        android:background="@color/color_gray"
+        android:layout_marginVertical="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/appVersionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upperHorizontalLine"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/appVersionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_app_version"
+            android:gravity="start"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/appVersionValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_version_value"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/bottomHorizontalLine"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appVersionContainer"
+        android:background="@color/color_gray"
+        android:layout_marginVertical="5dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

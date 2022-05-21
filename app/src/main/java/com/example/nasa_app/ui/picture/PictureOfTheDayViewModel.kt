@@ -18,6 +18,7 @@ class PictureOfTheDayViewModel(
         sendServerRequest()
         return liveDataForViewToObserve
     }
+
     private fun sendServerRequest() {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
@@ -44,8 +45,11 @@ class PictureOfTheDayViewModel(
                         }
                     }
                 }
-                override fun onFailure(call: Call<PODServerResponseData>, t:
-                Throwable) {
+
+                override fun onFailure(
+                    call: Call<PODServerResponseData>, t:
+                    Throwable
+                ) {
                     liveDataForViewToObserve.value = PictureOfTheDayData.Error(t)
                 }
             })
