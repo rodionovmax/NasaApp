@@ -3,6 +3,7 @@ package com.example.nasa_app.ui.picture
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,20 +12,33 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import coil.api.load
+import com.example.nasa_app.App
 import com.example.nasa_app.R
+import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.repository.LocalRepository
+import com.example.nasa_app.repository.LocalRepositoryImpl
+import com.example.nasa_app.ui.AppState
 import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.ui.chips.ChipsFragment
+import com.example.nasa_app.ui.favorites.FavoritesViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.chipGroup
+import kotlinx.android.synthetic.main.main_fragment.chip_group
 
 class PODFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    private val localRepository: LocalRepository = LocalRepositoryImpl(App.getInstance())
+
     private val viewModel: PODViewModel by lazy {
         ViewModelProviders.of(this).get(PODViewModel::class.java)
+    }
+
+    private val favoritesViewModel: FavoritesViewModel by lazy {
+        ViewModelProviders.of(this).get(FavoritesViewModel::class.java)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,7 +63,7 @@ class PODFragment : Fragment() {
         }
         setBottomAppBar(view)
 
-        chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+        chip_group.setOnCheckedChangeListener { chipGroup, position ->
             val chip: Chip? = chipGroup.findViewById(position)
             Toast.makeText(
                 context,
@@ -57,8 +71,8 @@ class PODFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
             viewModel.getData(position).observe(
-                    this@PODFragment,
-                    Observer<PODData> { renderData(it) }
+                this@PODFragment,
+                Observer<PODData> { renderData(it) }
             )
         }
     }
@@ -70,7 +84,15 @@ class PODFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast("Favourite")
+            R.id.app_bar_fav -> {
+                toast("Added to favorites")
+
+                val pictureOfTheDay : PODModel = localRepository.getPictureOfTheDay()
+
+                Log.d("pictureOfTheDay", pictureOfTheDay.toString())
+
+                favoritesViewModel.addPictureToFavorites(pictureOfTheDay)
+            }
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
@@ -86,10 +108,16 @@ class PODFragment : Fragment() {
         when (data) {
             is PODData.Success -> {
                 val serverResponseData = data.serverResponseData
+                val date = serverResponseData.date
                 val url = serverResponseData.url
-                if (url.isNullOrEmpty()) {
+                val title = serverResponseData.title
+                val description = serverResponseData.explanation
+                val copyright = serverResponseData.copyright
+                if (url.isNullOrEmpty() && title.isNullOrEmpty() &&
+                    description.isNullOrEmpty()
+                ) {
                     //showError("Сообщение, что ссылка пустая")
-                    toast("Link is empty")
+                    toast("Server data is missing")
                 } else {
                     //showSuccess()
                     image_view.load(url) {
@@ -97,7 +125,22 @@ class PODFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
+                    POD_title.text = title
+                    POD_description.text = description
+
+                    // Save to Picture of the day
+                    favoritesViewModel.savePictureAsPOD(
+                        PODModel(
+                            id = 0,
+                            date = date.toString(),
+                            url = url.toString(),
+                            title = title.toString(),
+                            explanation = description.toString(),
+                            copyright = copyright.toString()
+                        )
+                    )
                 }
+
             }
             is PODData.Loading -> {
                 //showLoading()

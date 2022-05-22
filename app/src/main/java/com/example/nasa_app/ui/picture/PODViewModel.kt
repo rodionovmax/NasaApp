@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasa_app.BuildConfig
+import com.example.nasa_app.network.models.PODModel
 import com.example.nasa_app.util.getDateToday
 import com.example.nasa_app.util.getDateTwoDaysAgo
 import com.example.nasa_app.util.getYesterdayDate

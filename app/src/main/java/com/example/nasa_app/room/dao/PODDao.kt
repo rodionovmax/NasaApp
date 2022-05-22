@@ -1,19 +1,23 @@
 package com.example.nasa_app.room.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
-import com.example.nasa_app.room.entities.FavoritePodEntity
+import androidx.room.*
+import com.example.nasa_app.room.entities.CurrentPODEntity
+import com.example.nasa_app.room.entities.PODEntity
 
 @Dao
 interface PODDao {
-    @Query("SELECT * FROM FavoritePodEntity")
-    fun getAllFavorites(): List<FavoritePodEntity>
+    @Query("SELECT * FROM PODEntity")
+    fun getAllFavorites(): List<PODEntity>
 
-    @Insert
-    fun addPodToFavorites(entity: FavoritePodEntity)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun addPODToFavorites(entity: PODEntity)
 
     @Delete
-    fun removePodToFavorites(entity: FavoritePodEntity)
+    fun removePODToFavorites(entity: PODEntity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun saveCurrentPOD(entity: CurrentPODEntity)
+
+    @Query("SELECT * FROM CurrentPODEntity WHERE id = (SELECT max(id) FROM CurrentPODEntity)")
+    fun getCurrentPOD() : CurrentPODEntity
 }

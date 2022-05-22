@@ -2,15 +2,18 @@ package com.example.nasa_app.repository
 
 import com.example.nasa_app.network.models.PODModel
 import com.example.nasa_app.room.dao.PODDao
+import com.example.nasa_app.room.entities.CurrentPODEntity
+import com.example.nasa_app.util.toCurrentPodEntity
 import com.example.nasa_app.util.toPodEntity
 import com.example.nasa_app.util.toPodModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import java.lang.NullPointerException
 
 class LocalRepositoryImpl(
-    private val localDataSource: PODDao
+    private val localDataSource: PODDao,
 ) : LocalRepository {
     override fun getFavoritePicturesOfTheDay(): List<PODModel> {
         var favoritePictures = listOf<PODModel>()
@@ -25,14 +28,43 @@ class LocalRepositoryImpl(
     }
 
     override fun addPictureToFavorites(picture: PODModel) {
-        // TODO: probably need coroutines here
-        localDataSource.addPodToFavorites(picture.toPodEntity())
+        localDataSource.addPODToFavorites(picture.toPodEntity())
     }
 
     override fun removePictureFromFavorites(picture: PODModel) {
         // TODO: probably need coroutines here
-        localDataSource.removePodToFavorites(picture.toPodEntity())
+        localDataSource.removePODToFavorites(picture.toPodEntity())
     }
+
+    override fun getPictureOfTheDay(): PODModel {
+        var currentPicture: PODModel = PODModel(
+            0,
+            "2022-05-19",
+            "https://apod.nasa.gov/apod/image/2205/TLE_2022-05-16-02-59-35s1024.jpg",
+            "A Digital Lunar Eclipse",
+            "Recorded on May 15/16 this sequence of exposures follows...",
+            "Michael Cain"
+        )
+        try {
+            runBlocking {
+                launch(Dispatchers.Default) {
+                    withContext(Dispatchers.IO) {
+                        currentPicture = localDataSource.getCurrentPOD().toPodModel()
+                    }
+                }
+            }
+        } catch (e : NullPointerException) {
+            e.printStackTrace()
+        }
+
+        return currentPicture
+    }
+
+    override fun saveToCurrentPOD(picture: PODModel) {
+        localDataSource.saveCurrentPOD(picture.toCurrentPodEntity())
+    }
+
+
 }
 
 

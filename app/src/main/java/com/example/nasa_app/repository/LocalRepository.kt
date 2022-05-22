@@ -6,4 +6,6 @@ interface LocalRepository {
     fun getFavoritePicturesOfTheDay() : List<PODModel>
     fun addPictureToFavorites(picture : PODModel)
     fun removePictureFromFavorites(picture: PODModel)
+    fun getPictureOfTheDay() : PODModel
+    fun saveToCurrentPOD(picture: PODModel)
 }

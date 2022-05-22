@@ -11,19 +11,27 @@ import com.example.nasa_app.ui.AppState
 
 class FavoritesViewModel(
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val favoritesRepository: LocalRepository = LocalRepositoryImpl(App.getInstance())
+    private val localRepository: LocalRepository = LocalRepositoryImpl(App.getInstance())
 ) : ViewModel() {
 
     fun getFavoritePictures() {
-//        liveDataToObserve.value = AppState.Success(favoritesRepository.getFavoritePicturesOfTheDay())
-        liveDataToObserve.value = AppState.Success(getFavoritesHardcoded())
+        liveDataToObserve.value = AppState.Success(localRepository.getFavoritePicturesOfTheDay())
     }
 
     fun addPictureToFavorites(picture : PODModel) {
-        liveDataToObserve.value = AppState.Success(favoritesRepository.addPictureToFavorites(picture))
+        liveDataToObserve.value = AppState.Success(localRepository.addPictureToFavorites(picture))
     }
 
     fun removePictureFromFavorites(picture: PODModel) {
-        liveDataToObserve.value = AppState.Success(favoritesRepository.removePictureFromFavorites(picture))
+        liveDataToObserve.value = AppState.Success(localRepository.removePictureFromFavorites(picture))
+    }
+
+    fun savePictureAsPOD(picture: PODModel) {
+        localRepository.saveToCurrentPOD(picture)
+    }
+
+    fun getPictureOfTheDay() {
+        liveDataToObserve.value = AppState.Success(localRepository.getPictureOfTheDay())
+//        localRepository.getPictureOfTheDay()
     }
 }
