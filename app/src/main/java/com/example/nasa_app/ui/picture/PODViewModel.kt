@@ -11,15 +11,14 @@ import com.example.nasa_app.util.getYesterdayDate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
-class PictureOfTheDayViewModel(
-    private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> =
+class PODViewModel(
+    private val liveDataForViewToObserve: MutableLiveData<PODData> =
         MutableLiveData(),
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
 ) :
     ViewModel() {
-    fun getData(day : Int): LiveData<PictureOfTheDayData> {
+    fun getData(day : Int): LiveData<PODData> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var date : String = ""
             when(day) {
@@ -35,10 +34,10 @@ class PictureOfTheDayViewModel(
     }
 
     private fun sendServerRequest(date: String) {
-        liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
+        liveDataForViewToObserve.value = PODData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            PictureOfTheDayData.Error(Throwable("You need API key"))
+            PODData.Error(Throwable("You need API key"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, date).enqueue(object :
                 Callback<PODServerResponseData> {
@@ -48,15 +47,15 @@ class PictureOfTheDayViewModel(
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         liveDataForViewToObserve.value =
-                            PictureOfTheDayData.Success(response.body()!!)
+                            PODData.Success(response.body()!!)
                     } else {
                         val message = response.message()
                         if (message.isNullOrEmpty()) {
                             liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable("Unidentified error"))
+                                PODData.Error(Throwable("Unidentified error"))
                         } else {
                             liveDataForViewToObserve.value =
-                                PictureOfTheDayData.Error(Throwable(message))
+                                PODData.Error(Throwable(message))
                         }
                     }
                 }
@@ -65,7 +64,7 @@ class PictureOfTheDayViewModel(
                     call: Call<PODServerResponseData>, t:
                     Throwable
                 ) {
-                    liveDataForViewToObserve.value = PictureOfTheDayData.Error(t)
+                    liveDataForViewToObserve.value = PODData.Error(t)
                 }
             })
         }

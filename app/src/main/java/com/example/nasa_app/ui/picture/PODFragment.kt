@@ -1,4 +1,4 @@
-package com.example.nasa_app.ui.home
+package com.example.nasa_app.ui.picture
 
 import android.content.Intent
 import android.net.Uri
@@ -14,20 +14,17 @@ import coil.api.load
 import com.example.nasa_app.R
 import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.ui.chips.ChipsFragment
-import com.example.nasa_app.ui.picture.PictureOfTheDayData
-import com.example.nasa_app.ui.picture.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_chips.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.chipGroup
 
-class PictureOfTheDayFragment : Fragment() {
+class PODFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private val viewModel: PictureOfTheDayViewModel by lazy {
-        ViewModelProviders.of(this).get(PictureOfTheDayViewModel::class.java)
+    private val viewModel: PODViewModel by lazy {
+        ViewModelProviders.of(this).get(PODViewModel::class.java)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,21 +50,15 @@ class PictureOfTheDayFragment : Fragment() {
         setBottomAppBar(view)
 
         chipGroup.setOnCheckedChangeListener { chipGroup, position ->
-//            chipGroup.findViewById<Chip>(position)?.let {
-//                Toast.makeText(context, "Selected picture from: ${it.text}", Toast.LENGTH_SHORT).show()
-//
-//            }
             val chip: Chip? = chipGroup.findViewById(position)
-
             Toast.makeText(
                 context,
                 "Selected picture from: ${chip?.text}",
                 Toast.LENGTH_SHORT
             ).show()
-
             viewModel.getData(position).observe(
-                    this@PictureOfTheDayFragment,
-                    Observer<PictureOfTheDayData> { renderData(it) }
+                    this@PODFragment,
+                    Observer<PODData> { renderData(it) }
             )
         }
     }
@@ -91,9 +82,9 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun renderData(data: PictureOfTheDayData) {
+    private fun renderData(data: PODData) {
         when (data) {
-            is PictureOfTheDayData.Success -> {
+            is PODData.Success -> {
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
                 if (url.isNullOrEmpty()) {
@@ -102,16 +93,16 @@ class PictureOfTheDayFragment : Fragment() {
                 } else {
                     //showSuccess()
                     image_view.load(url) {
-                        lifecycle(this@PictureOfTheDayFragment)
+                        lifecycle(this@PODFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
                 }
             }
-            is PictureOfTheDayData.Loading -> {
+            is PODData.Loading -> {
                 //showLoading()
             }
-            is PictureOfTheDayData.Error -> {
+            is PODData.Error -> {
                 //showError(data.error.message)
                 toast(data.error.message)
             }
@@ -153,7 +144,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = PictureOfTheDayFragment()
+        fun newInstance() = PODFragment()
         private var isMain = true
     }
 }

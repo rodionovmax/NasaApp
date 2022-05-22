@@ -16,21 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/gradientView"
-            android:layout_width="33dp"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/gradient_drawable"/>
-
         <ImageView
             android:id="@+id/favoritesPic"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/gradientView"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/favorites_picture" />
 
@@ -49,7 +40,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/release_date_favorites"
+            android:id="@+id/favoritesCopyright"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -59,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@id/favoritesTitle" />
 
         <CheckBox
-            android:id="@+id/favorites_checkbox"
+            android:id="@+id/favoritesCheckbox"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="16dp"
