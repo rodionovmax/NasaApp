@@ -69,19 +69,14 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         val isChecked: Boolean = p0.isChecked
         when (p0.id) {
             R.id.favoritesCheckbox -> if (isChecked) {
-                // TODO: uncomment to remove from favorites
-//                removeFromFavorites(favorites)
+                removeFromFavorites(favorites)
                 Toast.makeText(requireContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    // TODO: redo
     private fun removeFromFavorites(picture: PODModel) {
         viewModel.removePictureFromFavorites(picture)
-        viewModel.liveDataToObserve.observe(viewLifecycleOwner) {renderDataToRemoveFromFavorites(it)}
-//        viewModel.removePictureFromFavorites(picture)
-//        viewModel.getFavoritePictures()
     }
 
     private fun renderDataToRemoveFromFavorites(appState: AppState) {

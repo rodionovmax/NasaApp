@@ -5,7 +5,7 @@ import com.example.nasa_app.network.models.PODModel
 interface LocalRepository {
     fun getFavoritePicturesOfTheDay() : List<PODModel>
     fun addPictureToFavorites(picture : PODModel)
-    fun removePictureFromFavorites(picture: PODModel)
+    fun removePictureFromFavorites(picture: PODModel) : List<PODModel>
     fun getPictureOfTheDay() : PODModel
     fun saveToCurrentPOD(picture: PODModel)
 }

@@ -28,12 +28,21 @@ class LocalRepositoryImpl(
         localDataSource.addPODToFavorites(picture.toPodEntity())
     }
 
-    override fun removePictureFromFavorites(picture: PODModel) {
-        // TODO: probably need coroutines here
+    override fun removePictureFromFavorites(picture: PODModel): List<PODModel> {
+        // Delete picture from favorites
         GlobalScope.launch(Dispatchers.IO) {
             localDataSource.removePODToFavorites(picture.toPodEntity())
         }
-
+        // Get the updated list of favorites
+        var favoritePictures = listOf<PODModel>()
+        runBlocking {
+            launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
+                    favoritePictures = localDataSource.getAllFavorites().map { it.toPodModel() }
+                }
+            }
+        }
+        return favoritePictures
     }
 
     override fun getPictureOfTheDay(): PODModel {
