@@ -6,10 +6,7 @@ import com.example.nasa_app.room.entities.CurrentPODEntity
 import com.example.nasa_app.util.toCurrentPodEntity
 import com.example.nasa_app.util.toPodEntity
 import com.example.nasa_app.util.toPodModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.lang.NullPointerException
 
 class LocalRepositoryImpl(
@@ -33,7 +30,10 @@ class LocalRepositoryImpl(
 
     override fun removePictureFromFavorites(picture: PODModel) {
         // TODO: probably need coroutines here
-        localDataSource.removePODToFavorites(picture.toPodEntity())
+        GlobalScope.launch(Dispatchers.IO) {
+            localDataSource.removePODToFavorites(picture.toPodEntity())
+        }
+
     }
 
     override fun getPictureOfTheDay(): PODModel {

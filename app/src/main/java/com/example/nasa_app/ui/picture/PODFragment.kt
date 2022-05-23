@@ -87,6 +87,7 @@ class PODFragment : Fragment() {
             R.id.app_bar_fav -> {
                 toast("Added to favorites")
 
+                // TODO: has to be replaced by the method from favoritesViewModel
                 val pictureOfTheDay : PODModel = localRepository.getPictureOfTheDay()
 
                 Log.d("pictureOfTheDay", pictureOfTheDay.toString())

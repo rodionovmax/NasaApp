@@ -9,9 +9,11 @@ import com.example.nasa_app.R
 import com.example.nasa_app.network.models.PODModel
 import kotlinx.android.synthetic.main.favorites_item.view.*
 
-class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
+class FavoritesAdapter(
+    val onFavoritesClickedListener: OnFavoritesCheckboxListener?
+) : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
 
-    private var favorites : List<PODModel> = listOf()
+    private var favorites: List<PODModel> = listOf()
 
     fun setFavoritesList(data: List<PODModel>) {
         favorites = data
@@ -39,7 +41,20 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHold
                 favoritesPic.load(favorites.url)
                 favoritesTitle.text = favorites.title
                 favoritesCopyright.text = favorites.copyright
+
+                // click listener to remove from favorites
+                favoritesCheckbox.run {
+                    setOnClickListener {
+                        onFavoritesClickedListener?.onItemChecked(this, favorites)
+                    }
+                }
             }
         }
     }
+
+    interface OnFavoritesCheckboxListener {
+        fun onItemChecked(p0: View, favorites: PODModel)
+    }
 }
+
+
