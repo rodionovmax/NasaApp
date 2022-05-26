@@ -21,6 +21,7 @@ import com.example.nasa_app.ui.AppState
 import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.ui.chips.ChipsFragment
 import com.example.nasa_app.ui.favorites.FavoritesViewModel
+import com.example.nasa_app.ui.settings.SettingsFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -95,7 +96,7 @@ class PODFragment : Fragment() {
                 favoritesViewModel.addPictureToFavorites(pictureOfTheDay)
             }
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+                ?.add(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")

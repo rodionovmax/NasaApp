@@ -1,69 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.about.AboutFragment"
-     >
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    style="@style/ScreenBackground">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/versionTitle"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/about_version_title"
-        android:textAllCaps="true"
-        android:layout_margin="10dp"/>
+        app:liftOnScroll="true">
 
-    <View
-        android:id="@+id/upperHorizontalLine"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/versionTitle"
-        android:background="@color/color_gray"
-        android:layout_marginVertical="5dp"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            style="@style/AppToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimaryVariant"
+            app:menu="@menu/top_app_bar"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="@string/about_title"
+            app:titleTextColor="?attr/primaryFontColor"/>
 
-    <LinearLayout
-        android:id="@+id/appVersionContainer"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--<include layout="@layout/toolbar" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upperHorizontalLine"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="10dp">
+        tools:context=".ui.about.AboutFragment">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/appVersionTitle"
+            android:id="@+id/versionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/about_version_title"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/upperHorizontalLine"
             android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginVertical="5dp"
+            android:background="@color/color_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/versionTitle" />
+
+        <LinearLayout
+            android:id="@+id/appVersionContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_version"
-            android:gravity="start"/>
+            android:layout_marginHorizontal="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upperHorizontalLine">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/appVersionValue"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_version_value"
-            android:gravity="end"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appVersionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/about_app_version" />
 
-    </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appVersionValue"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/about_version_value" />
 
-    <View
-        android:id="@+id/bottomHorizontalLine"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appVersionContainer"
-        android:background="@color/color_gray"
-        android:layout_marginVertical="5dp"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/bottomHorizontalLine"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginVertical="5dp"
+            android:background="@color/color_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appVersionContainer" />
 
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -11,4 +11,16 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="color_gray">#66000000</color>
+
+    <color name="space_primary">#263238</color>
+    <color name="space_light">#4f5b62</color>
+    <color name="space_dark">#000a12</color>
+    <color name="space_secondary_primary">#37474f</color>
+    <color name="space_secondary_light">#62727b</color>
+    <color name="space_secondary_dark">#102027</color>
+    <color name="chip_stroke_space">#f4511e</color>
+    <color name="wiki_hint_space_checked">#babdbe</color>
+    <color name="wiki_hint_space_unchecked">#62727b</color>
+
+
 </resources>

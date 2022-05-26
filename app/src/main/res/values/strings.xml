@@ -16,12 +16,18 @@
     <string name="about_app_version">App version</string>
     <string name="about_version_value">0.1-beta</string>
     <string name="about_version_title">Version</string>
-    <string name="settings_title">Settings Fragment</string>
+    <string name="settings_title">Settings</string>
     <string name="remove_from_favorites">Remove from favorites</string>
     <string name="favorites_picture">Favorites picture</string>
     <string name="chip_today">Today</string>
     <string name="chip_yesterday">Yesterday</string>
     <string name="chip_two_days_ago">Two days ago</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="radio_button_space">Space</string>
+    <string name="radio_button_moon">Moon</string>
+    <string name="radio_button_mars">Mars</string>
+    <string name="favorites_title">Favorites</string>
+    <string name="about_title">About</string>
 </resources>
 
 
