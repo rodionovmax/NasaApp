@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.nasa_app.R
+import com.example.nasa_app.util.showToast
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_chips.*
 
@@ -23,16 +24,12 @@ class ChipsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         chip_group.setOnCheckedChangeListener { chipGroup, position ->
             chipGroup.findViewById<Chip>(position)?.let {
-                Toast.makeText(context, "Выбран ${it.text}", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Выбран ${it.text}")
             }
         }
 
         chip_close.setOnCloseIconClickListener {
-            Toast.makeText(
-                context,
-                "Close is Clicked",
-                Toast.LENGTH_SHORT
-            ).show()
+            showToast(requireContext(), "Close is Clicked")
         }
     }
 }

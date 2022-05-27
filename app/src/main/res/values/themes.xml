@@ -15,6 +15,9 @@
     </style>
 
     <style name="Theme.Space" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Font -->
+        <item name="android:fontFamily">?attr/themeFontStyle</item>
+        <item name="themeFontStyle">@font/robosapien</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/space_primary</item>
         <item name="colorPrimaryVariant">@color/space_dark</item>
@@ -36,8 +39,65 @@
         <item name="wikiHintColor">@color/wiki_hint_space_checked</item>
         <item name="wikiHintColorChecked">@color/wiki_hint_space_checked</item>
         <item name="wikiHintColorUnchecked">@color/wiki_hint_space_unchecked</item>
+        <item name="fabColor">@color/fab_space</item>
+        <item name="bottomNavMenuColor">?attr/colorPrimaryVariant</item>
+    </style>
 
-        <!--<item name="colorOnSurface">@color/purple_500</item>
-        <item name="colorSecondary">@color/white</item>-->
+    <style name="Theme.Mars" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Font -->
+        <item name="android:fontFamily">?attr/themeFontStyle</item>
+        <item name="themeFontStyle">@font/comicvaganza</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/mars_primary</item>
+        <item name="colorPrimaryVariant">@color/mars_dark</item>
+        <item name="colorOnPrimary">@color/mars_light</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/mars_secondary_primary</item>
+        <item name="colorSecondaryVariant">@color/mars_secondary_dark</item>
+        <item name="colorOnSecondary">@color/mars_secondary_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="primaryFontColor">@color/font_mars</item>
+        <item name="android:textColor">@color/font_mars</item>
+        <item name="iconFillColor">?attr/colorOnSecondary</item>
+        <item name="chipStrokeColorUnchecked">?attr/primaryFontColor</item>
+        <item name="chipStrokeColorChecked">?attr/colorPrimaryVariant</item>
+        <item name="chipFontUnchecked">?attr/primaryFontColor</item>
+        <item name="chipFontChecked">?attr/colorPrimaryVariant</item>
+        <item name="wikiHintColor">@color/font_mars</item>
+        <item name="wikiHintColorChecked">@color/font_mars</item>
+        <item name="wikiHintColorUnchecked">@color/wiki_hint_mars_unchecked</item>
+        <item name="fabColor">@color/fab_mars</item>
+        <item name="bottomNavMenuColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.Moon" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Font -->
+        <item name="android:fontFamily">?attr/themeFontStyle</item>
+        <item name="themeFontStyle">@font/walkthemoon</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/moon_primary</item>
+        <item name="colorPrimaryVariant">@color/moon_dark</item>
+        <item name="colorOnPrimary">@color/moon_light</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/moon_secondary_primary</item>
+        <item name="colorSecondaryVariant">@color/moon_secondary_dark</item>
+        <item name="colorOnSecondary">@color/moon_secondary_light</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="primaryFontColor">@color/font_moon</item>
+        <item name="android:textColor">@color/font_moon</item>
+        <item name="iconFillColor">?attr/colorOnSecondary</item>
+        <item name="chipStrokeColorUnchecked">?attr/primaryFontColor</item>
+        <item name="chipStrokeColorChecked">?attr/primaryFontColor</item>
+        <item name="chipFontUnchecked">?attr/primaryFontColor</item>
+        <item name="chipFontChecked">@color/chip_stroke_moon</item>
+        <item name="wikiHintColor">@color/font_moon</item>
+        <item name="wikiHintColorChecked">@color/font_moon</item>
+        <item name="wikiHintColorUnchecked">@color/wiki_hint_moon_unchecked</item>
+        <item name="fabColor">@color/fab_moon</item>
+        <item name="bottomNavMenuColor">?attr/primaryFontColor</item>
     </style>
 </resources>

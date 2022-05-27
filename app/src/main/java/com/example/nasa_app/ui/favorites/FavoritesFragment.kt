@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasa_app.R
 import com.example.nasa_app.network.models.PODModel
 import com.example.nasa_app.ui.AppState
+import com.example.nasa_app.util.showToast
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListener {
@@ -55,11 +56,11 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
             }
             is AppState.Loading -> {
                 favoritesLoadingLayout.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Loading...")
             }
             is AppState.Error -> {
                 favoritesLoadingLayout.visibility = View.GONE
-                Toast.makeText(requireContext(), "Oops something went wrong with loading favorites list...", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Oops something went wrong with loading favorites list...")
             }
         }
     }
@@ -70,7 +71,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         when (p0.id) {
             R.id.favoritesCheckbox -> if (isChecked) {
                 removeFromFavorites(favorites)
-                Toast.makeText(requireContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Removed from Favorites")
             }
         }
     }
@@ -87,11 +88,11 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
             }
             is AppState.Loading -> {
                 favoritesLoadingLayout.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Loading...")
             }
             is AppState.Error -> {
                 favoritesLoadingLayout.visibility = View.GONE
-                Toast.makeText(requireContext(), "Oops something went wrong with loading favorites list...", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Oops something went wrong with loading favorites list...")
             }
         }
     }

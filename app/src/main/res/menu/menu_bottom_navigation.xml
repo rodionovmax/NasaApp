@@ -7,7 +7,7 @@
             android:title="@string/picture_of_the_day_bottom_menu" />
         <item
             android:id="@+id/navigation_favorites"
-            android:icon="@drawable/ic_favorites"
+            android:icon="@drawable/ic_favorites_menu"
             android:title="@string/favorites_bottom_menu" />
         <item
             android:id="@+id/navigation_about"

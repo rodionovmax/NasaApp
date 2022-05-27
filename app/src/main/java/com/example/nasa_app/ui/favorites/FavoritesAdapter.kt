@@ -40,7 +40,11 @@ class FavoritesAdapter(
             with(itemView) {
                 favoritesPic.load(favorites.url)
                 favoritesTitle.text = favorites.title
-                favoritesCopyright.text = favorites.copyright
+                if (favorites.copyright != "null") {
+                    favoritesCopyright.text = favorites.copyright
+                } else {
+                    favoritesCopyright.text = ""
+                }
 
                 // click listener to remove from favorites
                 favoritesCheckbox.run {

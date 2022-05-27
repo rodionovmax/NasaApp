@@ -10,4 +10,7 @@
     <attr name="wikiHintColor" format="reference" />
     <attr name="wikiHintColorChecked" format="reference" />
     <attr name="wikiHintColorUnchecked" format="reference" />
+    <attr name="themeFontStyle" format="reference" />
+    <attr name="fabColor" format="reference" />
+    <attr name="bottomNavMenuColor" format="reference" />
 </resources>

@@ -33,6 +33,7 @@
         <item name="chipStrokeColor">@color/chip_stroke_color</item>
         <item name="chipStrokeWidth">@dimen/stroke_1dp</item>
         <item name="android:textColor">@color/chip_font_color</item>
+        <item name="android:textAppearance">@style/ChipText</item>
     </style>
 
     <style name="WikiTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -44,6 +45,20 @@
 
     <style name="CounterText" parent="TextAppearance.Design.Counter">
         <item name="android:textColor">?attr/primaryFontColor</item>
+    </style>
+
+    <style name="ChipText" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">?attr/themeFontStyle</item>
+    </style>
+
+    <style name="styledToast">
+        <item name="android:fontFamily">?attr/themeFontStyle</item>
+    </style>
+
+    <style name="bottomNavMenu">
+        <item name="itemTextColor">?attr/bottomNavMenuColor</item>
+        <item name="itemIconTint">?attr/bottomNavMenuColor</item>
     </style>
 
 </resources>

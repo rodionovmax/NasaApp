@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat.setTextAppearance
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,6 +24,7 @@ import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.ui.chips.ChipsFragment
 import com.example.nasa_app.ui.favorites.FavoritesViewModel
 import com.example.nasa_app.ui.settings.SettingsFragment
+import com.example.nasa_app.util.showToast
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -66,11 +69,7 @@ class PODFragment : Fragment() {
 
         chip_group.setOnCheckedChangeListener { chipGroup, position ->
             val chip: Chip? = chipGroup.findViewById(position)
-            Toast.makeText(
-                context,
-                "Selected picture from: ${chip?.text}",
-                Toast.LENGTH_SHORT
-            ).show()
+            showToast(requireContext(), "Selected picture from: ${chip?.text}")
             viewModel.getData(position).observe(
                 this@PODFragment,
                 Observer<PODData> { renderData(it) }
@@ -86,8 +85,7 @@ class PODFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> {
-                toast("Added to favorites")
-
+                showToast(requireContext(), "Added to favorites")
                 // TODO: has to be replaced by the method from favoritesViewModel
                 val pictureOfTheDay : PODModel = localRepository.getPictureOfTheDay()
 
@@ -119,7 +117,7 @@ class PODFragment : Fragment() {
                     description.isNullOrEmpty()
                 ) {
                     //showError("Сообщение, что ссылка пустая")
-                    toast("Server data is missing")
+                    showToast(requireContext(), "Server data is missing")
                 } else {
                     //showSuccess()
                     image_view.load(url) {
@@ -149,7 +147,7 @@ class PODFragment : Fragment() {
             }
             is PODData.Error -> {
                 //showError(data.error.message)
-                toast(data.error.message)
+                data.error.message?.let { showToast(requireContext(), it) }
             }
         }
     }
