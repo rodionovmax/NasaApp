@@ -11,6 +11,7 @@ import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.example.nasa_app.R
 import com.example.nasa_app.ThemeListener
+import com.example.nasa_app.databinding.FragmentSettingsBinding
 import com.example.nasa_app.ui.MainActivity
 import com.example.nasa_app.util.RADIO_BTN_THEME
 import com.example.nasa_app.util.THEME
@@ -20,6 +21,9 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 class SettingsFragment() : Fragment() {
 
     private lateinit var themeListener: ThemeListener
+
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +41,9 @@ class SettingsFragment() : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    ): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,7 +92,7 @@ class SettingsFragment() : Fragment() {
     private fun checkSelectedTheme() {
         val sharedPref = activity?.getPreferences(MODE_PRIVATE)
         val savedRadioIndex = sharedPref?.getInt(RADIO_BTN_THEME, 0)
-        val savedCheckedRadioButton: RadioButton = savedRadioIndex?.let { radioGroup.getChildAt(it) } as RadioButton
+        val savedCheckedRadioButton: RadioButton = savedRadioIndex?.let { binding.radioGroup.getChildAt(it) } as RadioButton
         savedCheckedRadioButton.isChecked = true
     }
 

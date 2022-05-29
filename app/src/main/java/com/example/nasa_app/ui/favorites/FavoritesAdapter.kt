@@ -4,14 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.example.nasa_app.R
+import com.example.nasa_app.databinding.FavoritesItemBinding
+import com.example.nasa_app.databinding.FragmentChipsBinding
+import com.example.nasa_app.databinding.FragmentFavoritesBinding
 import com.example.nasa_app.network.models.PODModel
 import kotlinx.android.synthetic.main.favorites_item.view.*
 
 class FavoritesAdapter(
     val onFavoritesClickedListener: OnFavoritesCheckboxListener?
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
+
+//    private var _binding: FavoritesItemBinding? = null
+//    private val binding get() = _binding!!
 
     private var favorites: List<PODModel> = listOf()
 
@@ -21,10 +27,15 @@ class FavoritesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
-        return FavoritesViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.favorites_item, parent, false) as View
-        )
+//        val binding = HoursListItemsBinding
+//            .inflate(LayoutInflater.from(parent.context), parent, false)
+//        return HoursViewHolder(binding)
+        val binding = FavoritesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return FavoritesViewHolder(binding)
+//        return FavoritesViewHolder(
+//            LayoutInflater.from(parent.context)
+//                .inflate(R.layout.favorites_item, parent, false) as View
+//        )
     }
 
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
@@ -35,9 +46,9 @@ class FavoritesAdapter(
         return favorites.size
     }
 
-    inner class FavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavoritesViewHolder(private val binding: FavoritesItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(favorites: PODModel) {
-            with(itemView) {
+            with(binding) {
                 favoritesPic.load(favorites.url)
                 favoritesTitle.text = favorites.title
                 if (favorites.copyright != "null") {
