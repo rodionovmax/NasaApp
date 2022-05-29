@@ -21,7 +21,6 @@ class SettingsFragment() : Fragment() {
 
     private lateinit var themeListener: ThemeListener
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
