@@ -1,12 +1,21 @@
 package com.example.nasa_app.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nasa_app.R
+import com.example.nasa_app.ThemeListener
 import com.example.nasa_app.ui.picture.PODFragment
 
-class MainActivity : AppCompatActivity() {
+const val THEME = "Theme"
+
+class MainActivity : AppCompatActivity(), ThemeListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // get theme before activity is created
+        val themeSelected = getThemeFromSharedPrefs()
+        onThemeSelected(themeSelected)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
@@ -15,4 +24,14 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
+    private fun getThemeFromSharedPrefs(): Int {
+        val sharedPreferences = getPreferences(MODE_PRIVATE)
+        return sharedPreferences.getInt(THEME, R.style.Theme_Space)
+    }
+
+    override fun onThemeSelected(theme: Int) {
+        setTheme(theme)
+    }
+
 }
