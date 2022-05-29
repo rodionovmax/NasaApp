@@ -59,7 +59,7 @@ class SettingsFragment() : Fragment() {
             when (checkedId) {
                 R.id.radio_button_1 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
-                    with (sharedPref.edit()) {
+                    with(sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Space)
                         putInt(RADIO_BTN_THEME, 0)
                         apply()
@@ -68,7 +68,7 @@ class SettingsFragment() : Fragment() {
                 }
                 R.id.radio_button_2 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
-                    with (sharedPref.edit()) {
+                    with(sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Moon)
                         putInt(RADIO_BTN_THEME, 1)
                         apply()
@@ -77,7 +77,7 @@ class SettingsFragment() : Fragment() {
                 }
                 R.id.radio_button_3 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
-                    with (sharedPref.edit()) {
+                    with(sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Mars)
                         putInt(RADIO_BTN_THEME, 2)
                         apply()
@@ -92,7 +92,8 @@ class SettingsFragment() : Fragment() {
     private fun checkSelectedTheme() {
         val sharedPref = activity?.getPreferences(MODE_PRIVATE)
         val savedRadioIndex = sharedPref?.getInt(RADIO_BTN_THEME, 0)
-        val savedCheckedRadioButton: RadioButton = savedRadioIndex?.let { binding.radioGroup.getChildAt(it) } as RadioButton
+        val savedCheckedRadioButton: RadioButton =
+            savedRadioIndex?.let { binding.radioGroup.getChildAt(it) } as RadioButton
         savedCheckedRadioButton.isChecked = true
     }
 
