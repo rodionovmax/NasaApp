@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.nasa_app.R
 import com.example.nasa_app.ThemeListener
 import com.example.nasa_app.ui.picture.PODFragment
-
-const val THEME = "Theme"
+import com.example.nasa_app.util.THEME
 
 class MainActivity : AppCompatActivity(), ThemeListener {
 

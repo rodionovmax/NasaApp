@@ -7,17 +7,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.example.nasa_app.R
 import com.example.nasa_app.ThemeListener
 import com.example.nasa_app.ui.MainActivity
-import com.example.nasa_app.ui.THEME
+import com.example.nasa_app.util.RADIO_BTN_THEME
+import com.example.nasa_app.util.THEME
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment() : Fragment() {
 
     private lateinit var themeListener: ThemeListener
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +49,16 @@ class SettingsFragment() : Fragment() {
         val sharedPref = activity?.getPreferences(MODE_PRIVATE)
         val intent = Intent(requireContext(), MainActivity::class.java)
 
+        // check the radio button based on the theme saved in shared preferences
+        checkSelectedTheme()
+
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radio_button_1 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with (sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Space)
+                        putInt(RADIO_BTN_THEME, 0)
                         apply()
                     }
                     themeListener.onThemeSelected(R.style.Theme_Space)
@@ -60,6 +67,7 @@ class SettingsFragment() : Fragment() {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with (sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Moon)
+                        putInt(RADIO_BTN_THEME, 1)
                         apply()
                     }
                     themeListener.onThemeSelected(R.style.Theme_Moon)
@@ -68,6 +76,7 @@ class SettingsFragment() : Fragment() {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with (sharedPref.edit()) {
                         putInt(THEME, R.style.Theme_Mars)
+                        putInt(RADIO_BTN_THEME, 2)
                         apply()
                     }
                     themeListener.onThemeSelected(R.style.Theme_Mars)
@@ -75,6 +84,13 @@ class SettingsFragment() : Fragment() {
             }
             startActivity(intent)
         }
+    }
+
+    private fun checkSelectedTheme() {
+        val sharedPref = activity?.getPreferences(MODE_PRIVATE)
+        val savedRadioIndex = sharedPref?.getInt(RADIO_BTN_THEME, 0)
+        val savedCheckedRadioButton: RadioButton = savedRadioIndex?.let { radioGroup.getChildAt(it) } as RadioButton
+        savedCheckedRadioButton.isChecked = true
     }
 
     companion object {

@@ -11,6 +11,8 @@ import androidx.annotation.RequiresApi
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE
 
+const val THEME = "Theme"
+const val RADIO_BTN_THEME = "RadioButtonTheme"
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun getDateToday(): String {
