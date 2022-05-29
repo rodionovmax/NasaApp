@@ -11,9 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import coil.api.load
+import coil.load
 import com.example.nasa_app.App
 import com.example.nasa_app.R
+import com.example.nasa_app.databinding.MainFragmentBinding
 import com.example.nasa_app.network.models.PODModel
 import com.example.nasa_app.repository.LocalRepository
 import com.example.nasa_app.repository.LocalRepositoryImpl
@@ -28,6 +29,8 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.chip_group
 
 class PODFragment : Fragment() {
+    private var _binding: MainFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -47,31 +50,31 @@ class PODFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        input_layout.setEndIconOnClickListener {
+        binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
             })
         }
         setBottomAppBar(view)
 
-        chip_group.setOnCheckedChangeListener { chipGroup, position ->
-            val chip: Chip? = chipGroup.findViewById(position)
+        binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+            val chip: Chip? = binding.chipGroup.findViewById(position)
             Toast.makeText(
                 context,
                 "Selected picture from: ${chip?.text}",
                 Toast.LENGTH_SHORT
             ).show()
             viewModel.getData(position).observe(
-                this@PODFragment,
+                viewLifecycleOwner,
                 Observer<PODData> { renderData(it) }
             )
         }
@@ -121,13 +124,13 @@ class PODFragment : Fragment() {
                     toast("Server data is missing")
                 } else {
                     //showSuccess()
-                    image_view.load(url) {
+                    binding.imageView.load(url) {
                         lifecycle(this@PODFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
-                    POD_title.text = title
-                    POD_description.text = description
+                    binding.PODTitle.text = title
+                    binding.PODDescription.text = description
 
                     // Save to Picture of the day
                     favoritesViewModel.savePictureAsPOD(
@@ -160,17 +163,17 @@ class PODFragment : Fragment() {
         fab.setOnClickListener {
             if (isMain) {
                 isMain = false
-                bottom_app_bar.navigationIcon = null
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
-                bottom_app_bar.navigationIcon =
+                binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
-                bottom_app_bar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
-                bottom_app_bar.replaceMenu(R.menu.menu_bottom_bar)
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
     }

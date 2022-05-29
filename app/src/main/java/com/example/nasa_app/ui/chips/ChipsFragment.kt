@@ -7,16 +7,22 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.nasa_app.R
+import com.example.nasa_app.databinding.FragmentAboutBinding
+import com.example.nasa_app.databinding.FragmentChipsBinding
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.fragment_chips.*
 
 class ChipsFragment : Fragment() {
 
+    private var _binding: FragmentChipsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_chips, container, false)
+    ): View {
+        _binding = FragmentChipsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
