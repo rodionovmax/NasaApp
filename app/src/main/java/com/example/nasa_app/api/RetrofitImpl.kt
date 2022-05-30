@@ -1,6 +1,5 @@
-package com.example.nasa_app.ui.picture
+package com.example.nasa_app.api
 
-import com.example.nasa_app.network.api.PictureOfTheDayAPI
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -9,11 +8,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-class PODRetrofitImpl {
+class RetrofitImpl {
 
     private val baseUrl = "https://api.nasa.gov/"
 
-    fun getRetrofitImpl(): PictureOfTheDayAPI {
+    fun getRetrofitImpl(): NasaApiService {
         val podRetrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(
@@ -23,7 +22,7 @@ class PODRetrofitImpl {
             )
             .client(createOkHttpClient(PODInterceptor()))
             .build()
-        return podRetrofit.create(PictureOfTheDayAPI::class.java)
+        return podRetrofit.create(NasaApiService::class.java)
     }
 
     private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {

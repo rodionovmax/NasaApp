@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class PODEntity (
+data class FavoritesEntity (
     @PrimaryKey(autoGenerate = true) val id: Long,
     val date: String,
     val url: String,

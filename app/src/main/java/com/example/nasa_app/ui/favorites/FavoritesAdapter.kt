@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.nasa_app.databinding.FavoritesItemBinding
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 
 class FavoritesAdapter(
     val onFavoritesClickedListener: OnFavoritesCheckboxListener?

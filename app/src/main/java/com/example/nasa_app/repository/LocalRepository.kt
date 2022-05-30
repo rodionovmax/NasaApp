@@ -1,6 +1,6 @@
 package com.example.nasa_app.repository
 
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 
 interface LocalRepository {
     fun getFavoritePicturesOfTheDay() : List<PODModel>
