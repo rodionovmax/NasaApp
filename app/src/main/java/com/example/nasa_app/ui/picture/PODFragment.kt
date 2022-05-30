@@ -67,9 +67,16 @@ class PODFragment : Fragment() {
         setBottomAppBar(view)
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+            // chip position increments when a fragment recreate
+            // so to make sure that parameter for viewModel.getData
+            // stays in 1..3 range datePosition and offset are used
+            val offset: Int = (position - 1) / 3
+            val datePosition = position - (offset * 3)
+
             val chip: Chip? = binding.chipGroup.findViewById(position)
             showToast(requireContext(), "Selected picture from: ${chip?.text}")
-            viewModel.getData(position).observe(viewLifecycleOwner, Observer<PODData> { renderData(it) })
+            viewModel.getData(datePosition)
+                .observe(viewLifecycleOwner, Observer<PODData> { renderData(it) })
         }
     }
 
@@ -154,14 +161,24 @@ class PODFragment : Fragment() {
                 isMain = false
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
                 binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
