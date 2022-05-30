@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.nasa_app.R
 import com.example.nasa_app.ThemeListener
 import com.example.nasa_app.databinding.FragmentSettingsBinding
-import com.example.nasa_app.ui.MainActivity
+import com.example.nasa_app.MainActivity
 import com.example.nasa_app.util.RADIO_BTN_THEME
 import com.example.nasa_app.util.THEME
 import kotlinx.android.synthetic.main.fragment_settings.*

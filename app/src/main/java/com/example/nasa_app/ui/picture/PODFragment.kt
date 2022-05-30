@@ -5,11 +5,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.widget.TextViewCompat.setTextAppearance
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,9 +18,7 @@ import com.example.nasa_app.databinding.MainFragmentBinding
 import com.example.nasa_app.network.models.PODModel
 import com.example.nasa_app.repository.LocalRepository
 import com.example.nasa_app.repository.LocalRepositoryImpl
-import com.example.nasa_app.ui.AppState
-import com.example.nasa_app.ui.MainActivity
-import com.example.nasa_app.ui.chips.ChipsFragment
+import com.example.nasa_app.MainActivity
 import com.example.nasa_app.ui.favorites.FavoritesViewModel
 import com.example.nasa_app.ui.settings.SettingsFragment
 import com.example.nasa_app.util.showToast
@@ -30,7 +26,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.chip_group
 
 class PODFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null

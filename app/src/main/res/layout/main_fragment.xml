@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/ScreenBackground">
@@ -15,7 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp">
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="?actionBarSize">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nasa_home_title"
@@ -124,10 +125,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/POD_title"
                 tools:text = "Description"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:layout_marginBottom="100dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/bottom_sheet_layout" />
 
@@ -138,7 +140,7 @@
         android:layout_gravity="bottom"
         style="@style/AppToolbar"
         app:fabAlignmentMode="center"
-        app:hideOnScroll="true"
+        app:hideOnScroll="false"
         app:layout_scrollFlags="scroll|enterAlways"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
@@ -150,7 +152,7 @@
         android:contentDescription="@string/floatingButton"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_plus_fab"
-        app:tint="#FFFFFF" />
+        app:tint="@color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

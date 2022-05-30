@@ -46,6 +46,8 @@
     <color name="wiki_hint_moon_unchecked">#d1d9ff</color>
     <color name="font_moon">#102027</color>
     <color name="fab_moon">#37474f</color>
+    <color name="bottom_sheet_background">#663b4351</color>
+    <color name="bottom_sheet_text">#000</color>
 
 
 </resources>
