@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
 import com.example.nasa_app.model.PODModel
-import com.example.nasa_app.ui.AppState
+import com.example.nasa_app.api.AppState
 import com.example.nasa_app.util.showToast
 import com.example.nasa_app.viewmodel.FavoritesViewModel
 

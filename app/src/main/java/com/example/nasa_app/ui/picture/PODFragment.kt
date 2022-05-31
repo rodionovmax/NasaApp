@@ -6,30 +6,26 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import coil.load
 import com.example.nasa_app.App
 import com.example.nasa_app.R
-import com.example.nasa_app.databinding.MainFragmentBinding
+import com.example.nasa_app.api.PODData
+import com.example.nasa_app.databinding.FragmentMainBinding
 import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.repository.LocalRepository
 import com.example.nasa_app.repository.LocalRepositoryImpl
-import com.example.nasa_app.MainActivity
-import com.example.nasa_app.api.PODData
-import com.example.nasa_app.viewmodel.FavoritesViewModel
 import com.example.nasa_app.ui.settings.SettingsFragment
 import com.example.nasa_app.util.showToast
+import com.example.nasa_app.viewmodel.FavoritesViewModel
 import com.example.nasa_app.viewmodel.PODViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.main_fragment.*
 
 class PODFragment : Fragment() {
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
@@ -52,7 +48,7 @@ class PODFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,10 +57,11 @@ class PODFragment : Fragment() {
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${input_edit_text.text.toString()}")
+                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-        setBottomAppBar(view)
+        // Temporary removed
+        //setBottomAppBar(view)
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
             // chip position increments when a fragment recreate
@@ -94,7 +91,7 @@ class PODFragment : Fragment() {
                 favoritesViewModel.addPictureToFavorites(pictureOfTheDay)
             }
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+                ?.add(R.id.host_container, SettingsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
@@ -152,7 +149,8 @@ class PODFragment : Fragment() {
         }
     }
 
-    private fun setBottomAppBar(view: View) {
+    // Temporary removed but want to save to use later
+    /*private fun setBottomAppBar(view: View) {
         val context = activity as MainActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
         setHasOptionsMenu(true)
@@ -182,7 +180,7 @@ class PODFragment : Fragment() {
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }
-    }
+    }*/
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)

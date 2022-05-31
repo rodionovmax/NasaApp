@@ -30,6 +30,11 @@
     <string name="radio_button_mars">Mars</string>
     <string name="favorites_title">Favorites</string>
     <string name="about_title">About</string>
+    <string name="radio_button_light">Light</string>
+    <string name="bottom_view_home">Home</string>
+    <string name="bottom_view_gallery">Gallery</string>
+    <string name="bottom_view_explore">Explore</string>
+    <string name="bottom_view_settings">Settings</string>
 </resources>
 
 

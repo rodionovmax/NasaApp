@@ -60,26 +60,35 @@ class SettingsFragment() : Fragment() {
                 R.id.radio_button_1 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with(sharedPref.edit()) {
-                        putInt(THEME, R.style.Theme_Space)
+                        putInt(THEME, R.style.Theme_Light)
                         putInt(RADIO_BTN_THEME, 0)
                         apply()
                     }
-                    themeListener.onThemeSelected(R.style.Theme_Space)
+                    themeListener.onThemeSelected(R.style.Theme_Light)
                 }
                 R.id.radio_button_2 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with(sharedPref.edit()) {
-                        putInt(THEME, R.style.Theme_Moon)
+                        putInt(THEME, R.style.Theme_Space)
                         putInt(RADIO_BTN_THEME, 1)
                         apply()
                     }
-                    themeListener.onThemeSelected(R.style.Theme_Moon)
+                    themeListener.onThemeSelected(R.style.Theme_Space)
                 }
                 R.id.radio_button_3 -> {
                     sharedPref ?: return@setOnCheckedChangeListener
                     with(sharedPref.edit()) {
-                        putInt(THEME, R.style.Theme_Mars)
+                        putInt(THEME, R.style.Theme_Moon)
                         putInt(RADIO_BTN_THEME, 2)
+                        apply()
+                    }
+                    themeListener.onThemeSelected(R.style.Theme_Moon)
+                }
+                R.id.radio_button_4 -> {
+                    sharedPref ?: return@setOnCheckedChangeListener
+                    with(sharedPref.edit()) {
+                        putInt(THEME, R.style.Theme_Mars)
+                        putInt(RADIO_BTN_THEME, 3)
                         apply()
                     }
                     themeListener.onThemeSelected(R.style.Theme_Mars)

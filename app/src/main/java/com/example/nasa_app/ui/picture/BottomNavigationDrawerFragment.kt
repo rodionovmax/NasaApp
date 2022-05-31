@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.nasa_app.FragmentNav
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.BottomNavigationLayoutBinding
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
@@ -13,7 +14,7 @@ import com.example.nasa_app.ui.favorites.FavoritesFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.bottom_navigation_layout.*
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment() : BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null
     private val binding get() = _binding!!
@@ -48,7 +49,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     private fun openFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, fragment)
+            .replace(R.id.host_container, fragment)
             .addToBackStack("")
             .commit()
     }
