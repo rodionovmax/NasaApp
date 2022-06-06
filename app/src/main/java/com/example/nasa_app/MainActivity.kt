@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.nasa_app.databinding.ActivityMainBinding
+import com.example.nasa_app.ui.explore.ExploreFragment
 import com.example.nasa_app.ui.favorites.FavoritesFragment
 import com.example.nasa_app.ui.picture.PODFragment
 import com.example.nasa_app.ui.settings.SettingsFragment
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), ThemeListener, FragmentNav {
                     true
                 }
                 R.id.bottom_view_explore -> {
-                    openFragment(FavoritesFragment.newInstance())
+                    openFragment(ExploreFragment.newInstance())
                     true
                 }
                 R.id.bottom_view_settings -> {

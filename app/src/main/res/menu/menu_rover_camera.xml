@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/camera_1" android:title="@string/camera1" />
+    <item android:id="@+id/camera_2" android:title="@string/camera2" />
+    <item android:id="@+id/camera_3" android:title="@string/camera3" />
+    <item android:id="@+id/camera_4" android:title="@string/camera4" />
+    <item android:id="@+id/camera_5" android:title="@string/camera5" />
+    <item android:id="@+id/camera_6" android:title="@string/camera6" />
+    <item android:id="@+id/camera_7" android:title="@string/camera7" />
+    <item android:id="@+id/camera_8" android:title="@string/camera8" />
+    <item android:id="@+id/camera_9" android:title="@string/camera9" />
+</menu>
