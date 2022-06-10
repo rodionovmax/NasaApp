@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasa_app.BuildConfig
-import com.example.nasa_app.api.PODData
-import com.example.nasa_app.api.RetrofitImpl
-import com.example.nasa_app.api.PODServerResponseData
+import com.example.nasa_app.data.api.PODData
+import com.example.nasa_app.data.api.RetrofitImpl
+import com.example.nasa_app.data.api.ServerResponsePOD
 import com.example.nasa_app.util.getDateToday
 import com.example.nasa_app.util.getDateTwoDaysAgo
 import com.example.nasa_app.util.getYesterdayDate
@@ -19,8 +19,8 @@ class PODViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PODData> =
         MutableLiveData(),
     private val retrofitImpl: RetrofitImpl = RetrofitImpl()
-) :
-    ViewModel() {
+) : ViewModel() {
+
     fun getData(day : Int): LiveData<PODData> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var date : String = ""
@@ -43,10 +43,10 @@ class PODViewModel(
             PODData.Error(Throwable("You need API key"))
         } else {
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, date).enqueue(object :
-                Callback<PODServerResponseData> {
+                Callback<ServerResponsePOD> {
                 override fun onResponse(
-                    call: Call<PODServerResponseData>,
-                    response: Response<PODServerResponseData>
+                    call: Call<ServerResponsePOD>,
+                    response: Response<ServerResponsePOD>
                 ) {
                     if (response.isSuccessful && response.body() != null) {
                         liveDataForViewToObserve.value =
@@ -64,7 +64,7 @@ class PODViewModel(
                 }
 
                 override fun onFailure(
-                    call: Call<PODServerResponseData>, t:
+                    call: Call<ServerResponsePOD>, t:
                     Throwable
                 ) {
                     liveDataForViewToObserve.value = PODData.Error(t)

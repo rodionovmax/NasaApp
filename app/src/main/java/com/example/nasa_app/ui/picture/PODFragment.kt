@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProviders
 import coil.load
 import com.example.nasa_app.App
 import com.example.nasa_app.R
-import com.example.nasa_app.api.PODData
+import com.example.nasa_app.data.api.PODData
 import com.example.nasa_app.databinding.FragmentMainBinding
-import com.example.nasa_app.model.PODModel
-import com.example.nasa_app.repository.LocalRepository
-import com.example.nasa_app.repository.LocalRepositoryImpl
+import com.example.nasa_app.data.models.PODModel
+import com.example.nasa_app.data.repository.LocalRepository
+import com.example.nasa_app.data.repository.LocalRepositoryImpl
 import com.example.nasa_app.ui.settings.SettingsFragment
 import com.example.nasa_app.util.showToast
 import com.example.nasa_app.viewmodel.FavoritesViewModel

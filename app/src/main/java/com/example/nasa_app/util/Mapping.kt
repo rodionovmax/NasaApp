@@ -1,6 +1,6 @@
 package com.example.nasa_app.util
 
-import com.example.nasa_app.model.PODModel
+import com.example.nasa_app.data.models.PODModel
 import com.example.nasa_app.room.entities.CurrentPODEntity
 import com.example.nasa_app.room.entities.FavoritesEntity
 

@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
-import com.example.nasa_app.model.PODModel
-import com.example.nasa_app.api.AppState
+import com.example.nasa_app.data.models.PODModel
+import com.example.nasa_app.data.api.AppState
 import com.example.nasa_app.util.showToast
 import com.example.nasa_app.viewmodel.FavoritesViewModel
 
