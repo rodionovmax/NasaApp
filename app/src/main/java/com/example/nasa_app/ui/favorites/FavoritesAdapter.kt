@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.nasa_app.databinding.FavoritesItemBinding
-import com.example.nasa_app.data.models.PODModel
+import com.example.nasa_app.models.PictureModel
 
 class FavoritesAdapter(
     val onFavoritesClickedListener: OnFavoritesCheckboxListener?
 ) : RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
 
-    private var favorites: List<PODModel> = listOf()
+    private var favorites: List<PictureModel> = listOf()
 
-    fun setFavoritesList(data: List<PODModel>) {
+    fun setFavoritesList(data: List<PictureModel>) {
         favorites = data
         notifyDataSetChanged()
     }
@@ -35,7 +35,7 @@ class FavoritesAdapter(
 
     inner class FavoritesViewHolder(private val binding: FavoritesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(favorites: PODModel) {
+        fun bind(favorites: PictureModel) {
             with(binding) {
                 favoritesPic.load(favorites.url)
                 favoritesTitle.text = favorites.title
@@ -56,7 +56,7 @@ class FavoritesAdapter(
     }
 
     interface OnFavoritesCheckboxListener {
-        fun onItemChecked(p0: View, favorites: PODModel)
+        fun onItemChecked(p0: View, favorites: PictureModel)
     }
 }
 

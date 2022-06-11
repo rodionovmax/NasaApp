@@ -1,9 +1,8 @@
 package com.example.nasa_app
 
 import android.app.Application
-import androidx.room.Room
-import com.example.nasa_app.room.dao.PODDao
-import com.example.nasa_app.room.db.MainDatabase
+import com.example.nasa_mars_api_service.database.db.MainDatabase
+
 
 class App : Application() {
 
@@ -13,26 +12,7 @@ class App : Application() {
     }
 
     companion object {
-        private var appInstance: App? = null
-        private var instance: MainDatabase? = null
-        private const val MOVIE_DB_NAME = "main_database.db"
-        fun getInstance(): PODDao {
-            if (instance == null) {
-                synchronized(MainDatabase::class.java) {
-                    if (instance == null) {
-                        if (appInstance == null) throw
-                        IllegalStateException("Application is null while creating DataBase")
-                        instance = Room.databaseBuilder(
-                            appInstance!!.applicationContext,
-                            MainDatabase::class.java,
-                            MOVIE_DB_NAME
-                        )
-                            .allowMainThreadQueries()
-                            .build()
-                    }
-                }
-            }
-            return instance!!.favoritePodDao()
-        }
+        private lateinit var appInstance: App
+        fun getDB() = MainDatabase.getInstance(appInstance.applicationContext)
     }
 }

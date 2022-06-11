@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.nasa_app.databinding.ActivityMainBinding
 import com.example.nasa_app.ui.explore.ExploreFragment
 import com.example.nasa_app.ui.favorites.FavoritesFragment
-import com.example.nasa_app.ui.picture.PODFragment
+import com.example.nasa_app.ui.pod.PODFragment
 import com.example.nasa_app.ui.settings.SettingsFragment
 import com.example.nasa_app.util.THEME
 

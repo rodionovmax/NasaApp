@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
-import com.example.nasa_app.data.models.PODModel
-import com.example.nasa_app.data.api.AppState
+import com.example.nasa_app.models.PictureModel
+import com.example.nasa_app.network.api.AppState
 import com.example.nasa_app.util.showToast
-import com.example.nasa_app.viewmodel.FavoritesViewModel
 
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListener {
 
@@ -57,7 +56,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         when (appState) {
             is AppState.Success -> {
                 binding.favoritesLoadingLayout.visibility = View.GONE
-                adapter.setFavoritesList(appState.success as List<PODModel>)
+                adapter.setFavoritesList(appState.success as List<PictureModel>)
             }
             is AppState.Loading -> {
                 binding.favoritesLoadingLayout.visibility = View.VISIBLE
@@ -74,7 +73,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         }
     }
 
-    override fun onItemChecked(p0: View, favorites: PODModel) {
+    override fun onItemChecked(p0: View, favorites: PictureModel) {
         p0 as CheckBox
         val isChecked: Boolean = p0.isChecked
         when (p0.id) {
@@ -85,7 +84,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         }
     }
 
-    private fun removeFromFavorites(picture: PODModel) {
+    private fun removeFromFavorites(picture: PictureModel) {
         viewModel.removePictureFromFavorites(picture)
     }
 
