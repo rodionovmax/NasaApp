@@ -5,6 +5,8 @@
     <dimen name="card_side_margin">8dp</dimen>
     <dimen name="card_bottom_margin">26dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
-    <dimen name="rover_item_image_height">100dp</dimen>
+    <dimen name="rover_item_image_width">150dp</dimen>
+    <dimen name="rover_item_image_height">150dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="card_top_margin">12dp</dimen>
 </resources>

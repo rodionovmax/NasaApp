@@ -1,6 +1,7 @@
 package com.example.nasa_app.network.api
 
-import com.example.nasa_app.network.models.response.POD
+import com.example.nasa_app.network.models.MarsPhotosListDto
+import com.example.nasa_app.network.models.response.PodDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,12 +12,12 @@ interface NasaApiService {
     fun getPictureOfTheDay(
         @Query("api_key") apiKey: String,
         @Query("date") date: String
-    ): Call<POD>
+    ): Call<PodDto>
 
     @GET("mars-photos/api/v1/rovers/curiosity/photos")
-    fun getMarsPhotos(
+    suspend fun getMarsPhotos(
         @Query("api_key") apiKey: String,
         @Query("sol") sol: Int,
         @Query("camera") camera: String,
-    )
+    ) : MarsPhotosListDto
 }

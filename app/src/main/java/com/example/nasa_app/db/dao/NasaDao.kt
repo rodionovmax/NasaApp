@@ -1,7 +1,7 @@
 package com.example.nasa_app.db.dao
 
 import androidx.room.*
-import com.example.nasa_app.db.entities.CurrentPODEntity
+import com.example.nasa_app.db.entities.PODEntity
 import com.example.nasa_app.db.entities.FavoriteEntity
 
 @Dao
@@ -16,8 +16,8 @@ interface NasaDao {
     fun removePODToFavorites(entity: FavoriteEntity)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveCurrentPOD(entity: CurrentPODEntity)
+    fun saveCurrentPOD(entity: PODEntity)
 
-    @Query("SELECT * FROM CurrentPODEntity WHERE id = (SELECT max(id) FROM CurrentPODEntity)")
-    fun getCurrentPOD() : CurrentPODEntity
+    @Query("SELECT * FROM PODEntity WHERE id = (SELECT max(id) FROM PODEntity)")
+    fun getCurrentPOD() : PODEntity
 }

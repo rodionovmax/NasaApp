@@ -7,10 +7,11 @@ import com.example.nasa_app.models.PictureModel
 import com.example.nasa_app.repository.MainRepository
 import com.example.nasa_app.repository.MainRepositoryImpl
 import com.example.nasa_app.network.api.AppState
+import com.example.nasa_app.network.api.RemoteDataSource
 
 class FavoritesViewModel(
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val mainRepository: MainRepository = MainRepositoryImpl(App.getDB().nasaDao)
+    private val mainRepository: MainRepository = MainRepositoryImpl(App.getDB().nasaDao, RemoteDataSource())
 ) : ViewModel() {
 
     fun getFavoritePictures() {

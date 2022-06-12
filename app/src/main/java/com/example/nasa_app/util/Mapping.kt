@@ -1,7 +1,7 @@
 package com.example.nasa_app.util
 
 import com.example.nasa_app.models.PictureModel
-import com.example.nasa_app.db.entities.CurrentPODEntity
+import com.example.nasa_app.db.entities.PODEntity
 import com.example.nasa_app.db.entities.FavoriteEntity
 
 fun FavoriteEntity.toPictureModel() : PictureModel {
@@ -16,13 +16,13 @@ fun PictureModel.toFavoriteEntity() : FavoriteEntity {
     )
 }
 
-fun PictureModel.toCurrentPodEntity() : CurrentPODEntity {
-    return CurrentPODEntity(
+fun PictureModel.toCurrentPodEntity() : PODEntity {
+    return PODEntity(
         id, date, url, title, explanation, copyright
     )
 }
 
-fun CurrentPODEntity.toPictureModel() : PictureModel {
+fun PODEntity.toPictureModel() : PictureModel {
     return PictureModel(
         id, date, url, title, explanation, copyright
     )

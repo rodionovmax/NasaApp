@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasa_app.BuildConfig
 import com.example.nasa_app.network.api.PODState
-import com.example.nasa_app.network.api.RetrofitImpl
-import com.example.nasa_app.network.models.response.POD
+import com.example.nasa_app.network.api.RemoteDataSource
+import com.example.nasa_app.network.models.response.PodDto
 import com.example.nasa_app.util.getDateToday
 import com.example.nasa_app.util.getDateTwoDaysAgo
 import com.example.nasa_app.util.getYesterdayDate
@@ -18,7 +18,7 @@ import retrofit2.Response
 class PODViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PODState> =
         MutableLiveData(),
-    private val retrofitImpl: RetrofitImpl = RetrofitImpl(),
+    private val remoteDataSource: RemoteDataSource = RemoteDataSource(),
 ) : ViewModel() {
 
     private var mutableDate = MutableLiveData<PODState>()
@@ -47,11 +47,11 @@ class PODViewModel(
         if (apiKey.isBlank()) {
             PODState.Error(Throwable("You need API key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, date).enqueue(object :
-                Callback<POD> {
+            remoteDataSource.getRetrofitImpl().getPictureOfTheDay(apiKey, date).enqueue(object :
+                Callback<PodDto> {
                 override fun onResponse(
-                    call: Call<POD>,
-                    response: Response<POD>
+                    call: Call<PodDto>,
+                    response: Response<PodDto>
                 ) {
                     val body = response.body()
                     if (response.isSuccessful && body != null) {
@@ -69,7 +69,7 @@ class PODViewModel(
                 }
 
                 override fun onFailure(
-                    call: Call<POD>, t:
+                    call: Call<PodDto>, t:
                     Throwable
                 ) {
                     mutableDate.value = PODState.Error(t)
