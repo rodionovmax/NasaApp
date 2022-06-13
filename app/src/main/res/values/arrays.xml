@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cameras">
+        <item>Front Hazard Avoidance Camera</item>
+        <item>Rear Hazard Avoidance Camera</item>
+        <item>Mast Camera</item>
+        <item>Chemistry and Camera Complex</item>
+        <item>Mars Hand Lens Imager</item>
+        <item>Mars Descent Imager</item>
+        <item>Navigation Camera</item>
+        <item>Panoramic Camera</item>
+        <item>Miniature Thermal Emission Spectrometer (Mini-TES)</item>
+    </string-array>
+</resources>

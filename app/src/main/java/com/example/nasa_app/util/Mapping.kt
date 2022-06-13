@@ -1,29 +1,29 @@
 package com.example.nasa_app.util
 
-import com.example.nasa_app.model.PODModel
-import com.example.nasa_app.room.entities.CurrentPODEntity
-import com.example.nasa_app.room.entities.FavoritesEntity
+import com.example.nasa_app.models.PictureModel
+import com.example.nasa_app.db.entities.PODEntity
+import com.example.nasa_app.db.entities.FavoriteEntity
 
-fun FavoritesEntity.toPodModel() : PODModel {
-    return PODModel(
+fun FavoriteEntity.toPictureModel() : PictureModel {
+    return PictureModel(
         id, date, url, title, explanation, copyright
     )
 }
 
-fun PODModel.toPodEntity() : FavoritesEntity {
-    return FavoritesEntity(
+fun PictureModel.toFavoriteEntity() : FavoriteEntity {
+    return FavoriteEntity(
         id, date, url, title, explanation, copyright
     )
 }
 
-fun PODModel.toCurrentPodEntity() : CurrentPODEntity {
-    return CurrentPODEntity(
+fun PictureModel.toCurrentPodEntity() : PODEntity {
+    return PODEntity(
         id, date, url, title, explanation, copyright
     )
 }
 
-fun CurrentPODEntity.toPodModel() : PODModel {
-    return PODModel(
+fun PODEntity.toPictureModel() : PictureModel {
+    return PictureModel(
         id, date, url, title, explanation, copyright
     )
 }

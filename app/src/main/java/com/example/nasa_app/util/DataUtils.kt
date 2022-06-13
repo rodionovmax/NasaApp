@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.nasa_app.models.MarsPhotoModel
+import com.example.nasa_app.network.models.MarsPhotoDTO
+import com.example.nasa_app.network.models.MarsPhotosListDto
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE
 
@@ -57,3 +60,18 @@ fun showToast(context: Context, msg: String) {
     // Showing the Toast Message
     toast.show()
 }
+
+fun convertMarsPhotoDtoToMarsPhotoModel(marsPhotoListDTO: MarsPhotosListDto) : List<MarsPhotoModel> {
+    val marsPhotos = marsPhotoListDTO.photos.map {
+        MarsPhotoModel(
+            id = it.id,
+            cameraId = it.camera.id,
+            cameraName = it.camera.cameraName,
+            roverId = it.rover.id,
+            imgSrc = it.imageSrc,
+            earthDate = it.earthDate
+        )
+    }
+    return marsPhotos
+}
+

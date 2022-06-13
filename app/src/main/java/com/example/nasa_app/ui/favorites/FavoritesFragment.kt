@@ -9,14 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.nasa_app.OnFavoritesCheckboxListener
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
-import com.example.nasa_app.model.PODModel
-import com.example.nasa_app.ui.AppState
+import com.example.nasa_app.models.PictureModel
+import com.example.nasa_app.network.api.AppState
 import com.example.nasa_app.util.showToast
-import com.example.nasa_app.viewmodel.FavoritesViewModel
 
-class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListener {
+class FavoritesFragment : Fragment(), OnFavoritesCheckboxListener {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
@@ -57,7 +57,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         when (appState) {
             is AppState.Success -> {
                 binding.favoritesLoadingLayout.visibility = View.GONE
-                adapter.setFavoritesList(appState.success as List<PODModel>)
+                adapter.setFavoritesList(appState.success as List<PictureModel>)
             }
             is AppState.Loading -> {
                 binding.favoritesLoadingLayout.visibility = View.VISIBLE
@@ -74,39 +74,19 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         }
     }
 
-    override fun onItemChecked(p0: View, favorites: PODModel) {
-        p0 as CheckBox
-        val isChecked: Boolean = p0.isChecked
-        when (p0.id) {
+    override fun onItemChecked(view: View, picture: PictureModel) {
+        view as CheckBox
+        val isChecked: Boolean = view.isChecked
+        when (view.id) {
             R.id.favoritesCheckbox -> if (isChecked) {
-                removeFromFavorites(favorites)
+                removeFromFavorites(picture)
                 showToast(requireContext(), "Removed from Favorites")
             }
         }
     }
 
-    private fun removeFromFavorites(picture: PODModel) {
+    private fun removeFromFavorites(picture: PictureModel) {
         viewModel.removePictureFromFavorites(picture)
-    }
-
-    private fun renderDataToRemoveFromFavorites(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                binding.favoritesLoadingLayout.visibility = View.GONE
-                getFavoritesFromViewModel()
-            }
-            is AppState.Loading -> {
-                binding.favoritesLoadingLayout.visibility = View.VISIBLE
-                showToast(requireContext(), "Loading...")
-            }
-            is AppState.Error -> {
-                binding.favoritesLoadingLayout.visibility = View.GONE
-                showToast(
-                    requireContext(),
-                    "Oops something went wrong with loading favorites list..."
-                )
-            }
-        }
     }
 
     companion object {

@@ -55,18 +55,25 @@
                     android:id="@+id/radio_button_1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/radio_button_space"
+                    android:text="@string/radio_button_light"
                     style="@style/RadioButton"/>
 
                 <RadioButton
                     android:id="@+id/radio_button_2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/radio_button_moon"
+                    android:text="@string/radio_button_space"
                     style="@style/RadioButton"/>
 
                 <RadioButton
                     android:id="@+id/radio_button_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/radio_button_moon"
+                    style="@style/RadioButton"/>
+
+                <RadioButton
+                    android:id="@+id/radio_button_4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/radio_button_mars"

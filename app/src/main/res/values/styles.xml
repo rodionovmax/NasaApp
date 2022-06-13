@@ -12,6 +12,12 @@
         <item name="android:backgroundTint">?attr/colorPrimaryVariant</item>
     </style>
 
+    <style name="BottomNavView">
+        <item name="android:background">?attr/colorPrimaryVariant</item>
+        <item name="itemIconTint">?attr/primaryFontColor</item>
+        <item name="itemTextColor">?attr/primaryFontColor</item>
+    </style>
+
     <style name="ScreenBackground">
         <item name="android:background">?attr/colorSecondaryVariant</item>
     </style>
