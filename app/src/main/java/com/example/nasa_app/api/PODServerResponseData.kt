@@ -1,4 +1,4 @@
-package com.example.nasa_app.ui.picture
+package com.example.nasa_app.api
 
 import com.google.gson.annotations.SerializedName
 

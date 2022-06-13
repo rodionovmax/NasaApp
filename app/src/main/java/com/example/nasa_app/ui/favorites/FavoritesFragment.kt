@@ -10,12 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nasa_app.R
-import com.example.nasa_app.databinding.FragmentAboutBinding
-import com.example.nasa_app.databinding.FragmentChipsBinding
 import com.example.nasa_app.databinding.FragmentFavoritesBinding
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.ui.AppState
-import kotlinx.android.synthetic.main.fragment_favorites.*
+import com.example.nasa_app.util.showToast
+import com.example.nasa_app.viewmodel.FavoritesViewModel
 
 class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListener {
 
@@ -43,13 +42,14 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         super.onViewCreated(view, savedInstanceState)
 
         binding.favoritesRecycler.adapter = adapter
-        binding.favoritesRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.favoritesRecycler.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         getFavoritesFromViewModel()
     }
 
     private fun getFavoritesFromViewModel() {
-        viewModel.liveDataToObserve.observe(viewLifecycleOwner) {renderData(it)}
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getFavoritePictures()
     }
 
@@ -65,7 +65,11 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
             }
             is AppState.Error -> {
                 binding.favoritesLoadingLayout.visibility = View.GONE
-                Toast.makeText(requireContext(), "Oops something went wrong with loading favorites list...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Oops something went wrong with loading favorites list...",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -76,7 +80,7 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
         when (p0.id) {
             R.id.favoritesCheckbox -> if (isChecked) {
                 removeFromFavorites(favorites)
-                Toast.makeText(requireContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Removed from Favorites")
             }
         }
     }
@@ -93,11 +97,14 @@ class FavoritesFragment : Fragment(), FavoritesAdapter.OnFavoritesCheckboxListen
             }
             is AppState.Loading -> {
                 binding.favoritesLoadingLayout.visibility = View.VISIBLE
-                Toast.makeText(requireContext(), "Loading...", Toast.LENGTH_SHORT).show()
+                showToast(requireContext(), "Loading...")
             }
             is AppState.Error -> {
                 binding.favoritesLoadingLayout.visibility = View.GONE
-                Toast.makeText(requireContext(), "Oops something went wrong with loading favorites list...", Toast.LENGTH_SHORT).show()
+                showToast(
+                    requireContext(),
+                    "Oops something went wrong with loading favorites list..."
+                )
             }
         }
     }

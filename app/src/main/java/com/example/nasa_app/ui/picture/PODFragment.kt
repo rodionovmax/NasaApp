@@ -3,7 +3,6 @@ package com.example.nasa_app.ui.picture
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -15,18 +14,19 @@ import coil.load
 import com.example.nasa_app.App
 import com.example.nasa_app.R
 import com.example.nasa_app.databinding.MainFragmentBinding
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.repository.LocalRepository
 import com.example.nasa_app.repository.LocalRepositoryImpl
-import com.example.nasa_app.ui.AppState
-import com.example.nasa_app.ui.MainActivity
-import com.example.nasa_app.ui.chips.ChipsFragment
-import com.example.nasa_app.ui.favorites.FavoritesViewModel
+import com.example.nasa_app.MainActivity
+import com.example.nasa_app.api.PODData
+import com.example.nasa_app.viewmodel.FavoritesViewModel
+import com.example.nasa_app.ui.settings.SettingsFragment
+import com.example.nasa_app.util.showToast
+import com.example.nasa_app.viewmodel.PODViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.chip_group
 
 class PODFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
@@ -67,16 +67,16 @@ class PODFragment : Fragment() {
         setBottomAppBar(view)
 
         binding.chipGroup.setOnCheckedChangeListener { chipGroup, position ->
+            // chip position increments when a fragment recreate
+            // so to make sure that parameter for viewModel.getData
+            // stays in 1..3 range datePosition and offset are used
+            val offset: Int = (position - 1) / 3
+            val datePosition = position - (offset * 3)
+
             val chip: Chip? = binding.chipGroup.findViewById(position)
-            Toast.makeText(
-                context,
-                "Selected picture from: ${chip?.text}",
-                Toast.LENGTH_SHORT
-            ).show()
-            viewModel.getData(position).observe(
-                viewLifecycleOwner,
-                Observer<PODData> { renderData(it) }
-            )
+            showToast(requireContext(), "Selected picture from: ${chip?.text}")
+            viewModel.getData(datePosition)
+                .observe(viewLifecycleOwner, Observer<PODData> { renderData(it) })
         }
     }
 
@@ -88,17 +88,13 @@ class PODFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> {
-                toast("Added to favorites")
+                showToast(requireContext(), "Added to favorites")
 
-                // TODO: has to be replaced by the method from favoritesViewModel
-                val pictureOfTheDay : PODModel = localRepository.getPictureOfTheDay()
-
-                Log.d("pictureOfTheDay", pictureOfTheDay.toString())
-
+                val pictureOfTheDay = favoritesViewModel.getPictureOfTheDay()
                 favoritesViewModel.addPictureToFavorites(pictureOfTheDay)
             }
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.container, ChipsFragment())?.addToBackStack(null)?.commit()
+                ?.add(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
@@ -121,7 +117,7 @@ class PODFragment : Fragment() {
                     description.isNullOrEmpty()
                 ) {
                     //showError("Сообщение, что ссылка пустая")
-                    toast("Server data is missing")
+                    showToast(requireContext(), "Server data is missing")
                 } else {
                     //showSuccess()
                     binding.imageView.load(url) {
@@ -151,7 +147,7 @@ class PODFragment : Fragment() {
             }
             is PODData.Error -> {
                 //showError(data.error.message)
-                toast(data.error.message)
+                data.error.message?.let { showToast(requireContext(), it) }
             }
         }
     }
@@ -165,14 +161,24 @@ class PODFragment : Fragment() {
                 isMain = false
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
             } else {
                 isMain = true
                 binding.bottomAppBar.navigationIcon =
                     ContextCompat.getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
         }

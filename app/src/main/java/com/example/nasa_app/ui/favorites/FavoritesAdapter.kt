@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.nasa_app.databinding.FavoritesItemBinding
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 
 class FavoritesAdapter(
     val onFavoritesClickedListener: OnFavoritesCheckboxListener?
@@ -39,7 +39,11 @@ class FavoritesAdapter(
             with(binding) {
                 favoritesPic.load(favorites.url)
                 favoritesTitle.text = favorites.title
-                favoritesCopyright.text = favorites.copyright
+                if (favorites.copyright != "null") {
+                    favoritesCopyright.text = favorites.copyright
+                } else {
+                    favoritesCopyright.text = ""
+                }
 
                 // click listener to remove from favorites
                 favoritesCheckbox.run {

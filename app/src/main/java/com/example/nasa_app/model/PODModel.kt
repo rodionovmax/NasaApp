@@ -1,4 +1,4 @@
-package com.example.nasa_app.network.models
+package com.example.nasa_app.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -13,9 +13,4 @@ data class PODModel (
     val copyright: String = "Michael Cain"
 ) : Parcelable
 
-fun getFavoritesHardcoded() : List<PODModel> {
-    return listOf(
-        PODModel()
-    )
 
-}

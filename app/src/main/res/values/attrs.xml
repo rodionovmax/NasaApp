@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="materialAppBar" format="reference" />
+    <attr name="primaryFontColor" format="reference" />
+    <attr name="iconFillColor" format="reference" />
+    <attr name="chipStrokeColorUnchecked" format="reference" />
+    <attr name="chipStrokeColorChecked" format="reference" />
+    <attr name="chipFontUnchecked" format="reference" />
+    <attr name="chipFontChecked" format="reference" />
+    <attr name="wikiHintColor" format="reference" />
+    <attr name="wikiHintColorChecked" format="reference" />
+    <attr name="wikiHintColorUnchecked" format="reference" />
+    <attr name="themeFontStyle" format="reference" />
+    <attr name="fabColor" format="reference" />
+    <attr name="bottomNavMenuColor" format="reference" />
+</resources>

@@ -10,7 +10,8 @@
     android:elevation="2dp"
     android:padding="4dp"
     app:cardElevation="2dp"
-    app:contentPadding="0dp">
+    app:contentPadding="0dp"
+    android:backgroundTint="?attr/colorPrimaryVariant">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

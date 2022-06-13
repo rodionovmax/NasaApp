@@ -1,12 +1,10 @@
-package com.example.nasa_app.network.api
+package com.example.nasa_app.api
 
-import com.example.nasa_app.ui.picture.PODServerResponseData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
 
-interface PictureOfTheDayAPI {
+interface NasaApiService {
 
     @GET("planetary/apod")
     fun getPictureOfTheDay(

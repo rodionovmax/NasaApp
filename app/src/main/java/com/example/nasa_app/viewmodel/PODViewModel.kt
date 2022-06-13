@@ -1,11 +1,13 @@
-package com.example.nasa_app.ui.picture
+package com.example.nasa_app.viewmodel
 
 import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasa_app.BuildConfig
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.api.PODData
+import com.example.nasa_app.api.RetrofitImpl
+import com.example.nasa_app.api.PODServerResponseData
 import com.example.nasa_app.util.getDateToday
 import com.example.nasa_app.util.getDateTwoDaysAgo
 import com.example.nasa_app.util.getYesterdayDate
@@ -16,7 +18,7 @@ import retrofit2.Response
 class PODViewModel(
     private val liveDataForViewToObserve: MutableLiveData<PODData> =
         MutableLiveData(),
-    private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
+    private val retrofitImpl: RetrofitImpl = RetrofitImpl()
 ) :
     ViewModel() {
     fun getData(day : Int): LiveData<PODData> {

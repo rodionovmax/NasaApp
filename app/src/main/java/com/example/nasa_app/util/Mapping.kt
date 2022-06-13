@@ -1,17 +1,17 @@
 package com.example.nasa_app.util
 
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.room.entities.CurrentPODEntity
-import com.example.nasa_app.room.entities.PODEntity
+import com.example.nasa_app.room.entities.FavoritesEntity
 
-fun PODEntity.toPodModel() : PODModel {
+fun FavoritesEntity.toPodModel() : PODModel {
     return PODModel(
         id, date, url, title, explanation, copyright
     )
 }
 
-fun PODModel.toPodEntity() : PODEntity {
-    return PODEntity(
+fun PODModel.toPodEntity() : FavoritesEntity {
+    return FavoritesEntity(
         id, date, url, title, explanation, copyright
     )
 }

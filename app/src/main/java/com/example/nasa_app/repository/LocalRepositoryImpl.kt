@@ -1,8 +1,7 @@
 package com.example.nasa_app.repository
 
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.room.dao.PODDao
-import com.example.nasa_app.room.entities.CurrentPODEntity
 import com.example.nasa_app.util.toCurrentPodEntity
 import com.example.nasa_app.util.toPodEntity
 import com.example.nasa_app.util.toPodModel

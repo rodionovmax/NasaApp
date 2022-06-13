@@ -1,9 +1,9 @@
-package com.example.nasa_app.ui.favorites
+package com.example.nasa_app.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nasa_app.App
-import com.example.nasa_app.network.models.PODModel
+import com.example.nasa_app.model.PODModel
 import com.example.nasa_app.repository.LocalRepository
 import com.example.nasa_app.repository.LocalRepositoryImpl
 import com.example.nasa_app.ui.AppState
@@ -29,8 +29,7 @@ class FavoritesViewModel(
         localRepository.saveToCurrentPOD(picture)
     }
 
-    fun getPictureOfTheDay() {
-        liveDataToObserve.value = AppState.Success(localRepository.getPictureOfTheDay())
-//        localRepository.getPictureOfTheDay()
+    fun getPictureOfTheDay() : PODModel {
+        return localRepository.getPictureOfTheDay()
     }
 }
