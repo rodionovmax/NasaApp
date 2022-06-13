@@ -52,6 +52,7 @@
     <string name="choose_camera">Choose camera</string>
     <string name="empty_data_img">No data received</string>
     <string name="no_data_string">No data received</string>
+    <string name="mark_as_favorite">Mark as favorite</string>
 </resources>
 
 

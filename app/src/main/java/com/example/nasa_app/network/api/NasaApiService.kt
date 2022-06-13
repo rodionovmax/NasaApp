@@ -19,5 +19,6 @@ interface NasaApiService {
         @Query("api_key") apiKey: String,
         @Query("sol") sol: Int,
         @Query("camera") camera: String,
+        @Query("page") page: Int,
     ) : MarsPhotosListDto
 }

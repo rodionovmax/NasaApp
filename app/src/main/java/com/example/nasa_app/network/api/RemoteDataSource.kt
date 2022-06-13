@@ -57,7 +57,7 @@ class RemoteDataSource {
         val data = MutableLiveData<AppState>()
         GlobalScope.launch(Dispatchers.IO) {
             val nasaAPI = getRetrofitImpl()
-            val response = nasaAPI.getMarsPhotos(BuildConfig.NASA_API_KEY, sol = 1000, camera)
+            val response = nasaAPI.getMarsPhotos(BuildConfig.NASA_API_KEY, sol = 1000, camera, page = 1)
             data.postValue(checkServerError(response))
         }
         return data

@@ -4,15 +4,18 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.example.nasa_app.OnFavoritesCheckboxListener
 import com.example.nasa_app.R
 import com.example.nasa_app.network.api.PODState
 import com.example.nasa_app.databinding.FragmentMainBinding
 import com.example.nasa_app.models.PictureModel
+import com.example.nasa_app.ui.favorites.FavoritesAdapter
 import com.example.nasa_app.ui.settings.SettingsFragment
 import com.example.nasa_app.util.showToast
 import com.example.nasa_app.ui.favorites.FavoritesViewModel
@@ -69,6 +72,21 @@ class PODFragment : Fragment() {
             viewModel.setData(datePosition)
         }
         viewModel.getData().observe(viewLifecycleOwner) { renderData(it) }
+
+        // Mark picture as Favorite
+        binding.markAsFavoriteCheckbox.run {
+            setOnClickListener {
+                val isChecked: Boolean = binding.markAsFavoriteCheckbox.isChecked
+                val pictureOfTheDay = favoritesViewModel.getPictureOfTheDay()
+                if (isChecked) {
+                    favoritesViewModel.addPictureToFavorites(pictureOfTheDay)
+                    showToast(requireContext(), "Added to Favorites")
+                } else {
+                    favoritesViewModel.removePictureFromFavorites(pictureOfTheDay)
+                    showToast(requireContext(), "Removed from Favorites")
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

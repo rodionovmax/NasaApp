@@ -29,7 +29,9 @@ class MainRepositoryImpl(
     }
 
     override fun addPictureToFavorites(picture: PictureModel) {
-        localDataSource.addPODToFavorites(picture.toFavoriteEntity())
+        GlobalScope.launch(Dispatchers.IO) {
+            localDataSource.addPODToFavorites(picture.toFavoriteEntity())
+        }
     }
 
     override fun removePictureFromFavorites(picture: PictureModel): List<PictureModel> {

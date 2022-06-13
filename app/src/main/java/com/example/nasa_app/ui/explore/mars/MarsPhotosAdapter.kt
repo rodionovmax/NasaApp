@@ -31,13 +31,9 @@ class MarsPhotosAdapter : RecyclerView.Adapter<MarsPhotosAdapter.MarsPhotosViewH
         holder.bind(marsPhotos[position])
     }
 
-    // return no more than 10 pictures. TODO: implement paging later
+    // TODO: implement paging later
     override fun getItemCount(): Int {
-        return if (marsPhotos.size < 10) {
-            marsPhotos.size
-        } else {
-            10
-        }
+        return marsPhotos.size
     }
 
     inner class MarsPhotosViewHolder(private val binding: MarsPhotoItemBinding) :

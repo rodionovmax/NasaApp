@@ -106,6 +106,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
+            <CheckBox
+                android:id="@+id/mark_as_favorite_checkbox"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:button="@drawable/ic_add_to_favorites_flag"
+                app:useMaterialThemeColors="false"
+                app:layout_constraintEnd_toEndOf="@+id/image_view"
+                app:layout_constraintTop_toTopOf="@+id/image_view"
+                app:srcCompat="@drawable/ic_favorites_filled"
+                android:contentDescription="@string/mark_as_favorite" />
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/POD_title"
                 android:layout_width="match_parent"
