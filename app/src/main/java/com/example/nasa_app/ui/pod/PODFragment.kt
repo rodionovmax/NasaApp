@@ -109,23 +109,13 @@ class PODFragment : Fragment() {
                 ) {
                     //showError("Сообщение, что ссылка пустая")
                     showToast(requireContext(), "Server data is missing")
-
-                    val _data = favoritesViewModel.getPictureOfTheDay()
-                    binding.imageView.load(_data.url) {
-                        lifecycle(this@PODFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
-
-                    }
-                    binding.PODTitle.text = _data.title
-                    binding.PODDescription.text = _data.explanation
+                    getPodFromDB()
                 } else {
                     //showSuccess()
                     binding.imageView.load(url) {
                         lifecycle(this@PODFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
-
                     }
                     binding.PODTitle.text = title
                     binding.PODDescription.text = description
@@ -150,17 +140,22 @@ class PODFragment : Fragment() {
             is PODState.Error -> {
                 //showError(data.error.message)
                 data.error.message?.let { showToast(requireContext(), it) }
-                val _data = favoritesViewModel.getPictureOfTheDay()
-                binding.imageView.load(_data.url) {
-                    lifecycle(this@PODFragment)
-                    error(R.drawable.ic_load_error_vector)
-                    placeholder(R.drawable.ic_no_photo_vector)
-
-                }
-                binding.PODTitle.text = _data.title
-                binding.PODDescription.text = _data.explanation
+                getPodFromDB()
             }
         }
+    }
+
+    // set data to Picture of The Day from the database
+    private fun getPodFromDB() {
+        val podData = favoritesViewModel.getPictureOfTheDay()
+        binding.imageView.load(podData.url) {
+            lifecycle(this@PODFragment)
+            error(R.drawable.ic_load_error_vector)
+            placeholder(R.drawable.ic_no_photo_vector)
+
+        }
+        binding.PODTitle.text = podData.title
+        binding.PODDescription.text = podData.explanation
     }
 
     // Temporary removed but want to save to use later

@@ -48,7 +48,7 @@
 
         android:clipToPadding="false"
         android:layout_marginTop="@dimen/card_top_margin"
-        android:paddingEnd="@dimen/card_side_margin"
+        android:paddingBottom="@dimen/rover_item_image_height"
         android:paddingStart="@dimen/card_side_margin"
 
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -63,7 +63,6 @@
         android:id="@+id/mars_fragment_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         tools:visibility="visible">
 
         <ProgressBar
@@ -73,5 +72,12 @@
             android:indeterminateTint="?attr/primaryFontColor"
             android:layout_gravity="center" />
     </FrameLayout>
+
+    <include
+        android:id="@+id/empty_view"
+        android:layout_gravity="center"
+        layout="@layout/no_data_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
